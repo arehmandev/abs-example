@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: {{ .Values.db.name }}
+spec:
+    ports:
+        - targetPort: 3306
+          port: 3306
+    selector:
+        tier: {{ .Values.db.name }}

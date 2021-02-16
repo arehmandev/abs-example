@@ -1,0 +1,13 @@
+
+image:
+  app: arehmandev/appflask:v0.1.0
+  db: mysql:5.7
+
+db:
+  name: product
+  user: container_solutions
+  password: noob123
+
+app:
+  name: apiapp
+  port: 5000

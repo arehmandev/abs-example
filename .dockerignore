@@ -1,0 +1,7 @@
+README.md
+LICENSE
+db/
+kube/
+images/
+venv/
+.github/

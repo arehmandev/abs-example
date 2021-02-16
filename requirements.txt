@@ -1,0 +1,13 @@
+flask 
+flask-sqlalchemy 
+uwsgi
+flask-marshmallow 
+marshmallow-sqlalchemy
+#mysqlclient
+PyMySQL
+cryptography
+mysql-connector-python
+bcrypt
+make_response
+gunicorn
+flask-jwt

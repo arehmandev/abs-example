@@ -1,0 +1,25 @@
+version: '3.3' 
+services:
+  web:
+    image: zaibanahmed43/appflask:v0.1.0
+    restart: always
+    build:
+      context: .
+    environment:
+      DB_USER: container_solutions
+      DB_PASSWORD: noob123
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: product
+    ports:
+     - "5000:5000"
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "true"
+      MYSQL_USER: container_solutions
+      MYSQL_PASSWORD: noob123
+      MYSQL_DATABASE: product
+    ports:
+      - "3306:3306"

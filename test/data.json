@@ -1,0 +1,10 @@
+{
+  "survived": true,
+  "passengerClass": 0,
+  "name": "Coolio",
+  "sex": "male",
+  "age": 0,
+  "siblingsOrSpousesAboard": 0,
+  "parentsOrChildrenAboard": 0,
+  "fare": 0
+}
