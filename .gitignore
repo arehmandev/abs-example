@@ -1,3 +1,4 @@
- apiapp/__pycache__
- .vscode
+apiapp/__pycache__
+.vscode
 venv
+__pycache__/*
