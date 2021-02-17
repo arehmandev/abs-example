@@ -21,8 +21,10 @@
   curl localhost:5000/people 
   # Delete product
   curl --header "Content-Type: application/json" --request DELETE localhost:5000/people/1
-  # Load people from CSV
+  # Load people from test CSV
   curl localhost:5000/load 
+  # Load your own custom CSV
+   curl -F 'file=@test/titanic.csv' localhost:5000/csv
 ```
 
 ## Helm

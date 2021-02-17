@@ -3,6 +3,7 @@ from apiapp.models import Survivor, SurvivorSchema
 import csv
 import os
 import threading
+import io
 
 
 survivor_schema = SurvivorSchema()
@@ -65,7 +66,8 @@ def load():
         if os.path.isfile(lock_file):
             return f"CSV data already loaded, file present: {lock_file} "
 
-        process_csv(csv_file)
+        with open(csv_file) as f:
+            process_csv(f.readlines())
         x = open(lock_file, "w")
         x.write("complete")
         x.close()
@@ -73,12 +75,16 @@ def load():
     return f"All CSV data loaded from {csv_file}"
 
 
-def process_csv(csv_file):
-    csv_file_data = str()
-    with open(csv_file) as file:
-        csv_file_data = file.read()
+@app.route("/csv", methods=["POST"])
+def csv_upload():
 
-    csvreader = csv.reader(csv_file_data.splitlines(),
+    data = io.StringIO(request.files['file'].stream.read().decode("UTF8"))
+    return process_csv(data)
+
+
+def process_csv(csv_file_data):
+
+    csvreader = csv.reader(csv_file_data,
                            delimiter=',')
 
     counter = 0
@@ -97,6 +103,9 @@ def process_csv(csv_file):
 
             index += 1
 
-        single = Survivor(**single_dict)
-        db.session.add(single)
-        db.session.commit()
+        entry = db.session.query(Survivor).filter_by(**single_dict).first()
+        if not entry:
+            entry = Survivor(**single_dict)
+            db.session.add(entry)
+            db.session.commit()
+    return "All CSV data loaded from request"

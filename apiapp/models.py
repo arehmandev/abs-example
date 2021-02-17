@@ -8,10 +8,12 @@ class Survivor(db.Model):
     passengerClass = db.Column(db.Integer)
     name = db.Column(db.Text)
     sex = db.Column(db.Text)
-    age = db.Column(db.Integer)
+    # Some ages are decimals - store as text for consistency
+    age = db.Column(db.Text)
     siblingsOrSpousesAboard = db.Column(db.Integer)
     parentsOrChildrenAboard = db.Column(db.Integer)
-    fare = db.Column(db.Integer)
+    # Decimals - store as text for consistency
+    fare = db.Column(db.Text)
 
     def __init__(self, **data):
 
