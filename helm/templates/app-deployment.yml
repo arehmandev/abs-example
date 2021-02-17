@@ -5,7 +5,7 @@ metadata:
     labels:
         app: {{ .Values.app.name }}  
 spec:
-    replicas: 3
+    replicas: 1
     selector:
         matchLabels:
             app: {{ .Values.app.name }}  
@@ -20,3 +20,23 @@ spec:
                   ports:
                     - containerPort: 5000
                   imagePullPolicy: Always
+                  env:
+                    - name: DB_NAME
+                      valueFrom:
+                        secretKeyRef:
+                            name: {{ .Values.db.name }}
+                            key: name
+                    - name: DB_USER
+                      valueFrom:
+                        secretKeyRef:
+                            name: {{ .Values.db.name }}
+                            key: user
+                    - name: DB_HOST
+                      value: {{ .Values.db.name }}
+                    - name: DB_PASSWORD
+                      valueFrom:
+                        secretKeyRef:
+                            name: {{ .Values.db.name }}
+                            key: password
+                    - name: DB_PORT
+                      value: "3306"

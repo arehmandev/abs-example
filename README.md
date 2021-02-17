@@ -29,5 +29,13 @@
 
 ## Helm
 
-I've added the helm chart in the helm directory, haven't tested
-## Routes  
+I've added the helm chart in the helm directory.
+
+```
+helm upgrade --install myrelease .
+
+# This will give you the url+port
+minikube service --url apiapp
+
+curl {url}:{port}/people
+```
