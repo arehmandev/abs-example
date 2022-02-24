@@ -1,0 +1,21 @@
+# 8s          Warning   ProcessServiceAttachmentFailed   serviceattachment/abs-sa   error processing service attachment "default/abs-sa": "failed to find nat subnets: failed to find Subnetwork europe-west2/psc-bld-psc-euwe1: googleapi: Error 404: The resource 'projects/psc-bld/regions/europe-west2/subnetworks/psc-bld-psc-euwe1' was not found, notFound"
+
+#ERROR: (gcloud.compute.forwarding-rules.create) The region of the provided service attachment must equal the [--region] of the forwarding rule.
+
+
+apiVersion: networking.gke.io/v1beta1
+kind: ServiceAttachment
+metadata:
+ name: abs-sa
+ namespace: default
+spec:
+ connectionPreference: ACCEPT_MANUAL
+ consumerAllowList:
+ - connectionLimit: 10
+   project: 'psc-tst'
+ natSubnets:
+ - psc-bld-psc
+ proxyProtocol: false
+ resourceRef:
+   kind: Service
+   name: gke-abs-psc
